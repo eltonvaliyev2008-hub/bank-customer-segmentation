@@ -87,6 +87,7 @@ python app.py
 API will be available at `http://localhost:8000`
 
 ---
+> Note: model.pkl and scaler.pkl are hosted on Hugging Face Spaces due to file size.
 
 ## Tech Stack
 
