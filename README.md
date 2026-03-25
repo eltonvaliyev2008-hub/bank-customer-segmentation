@@ -17,9 +17,28 @@ Takes a customer's salary, balance, credit score, transaction history and 16 oth
 ## Pipeline
 
 ```
-EDA → LabelEncoder → ColumnTransformer (RobustScaler + StandardScaler) →
-Elbow + Silhouette → KMeans (K=5) → Cluster Analysis + PCA →
-KNN / LR(L1,L2) / DT / RF → RandomizedSearchCV → Pickle → FastAPI → Docker → HF Spaces
+1.  Data Loading        — pd.read_csv, shape, dtypes check
+2.  EDA                 — head, tail, info, describe, isna, duplicated, value_counts, nunique
+3.  Type Conversion     — maas_azn → int
+4.  Drop Columns        — cluster, cluster_adi removed before modeling
+5.  Label Encoding      — seher, pese, tehsil, aile_veziyyeti, bank_mehsullari
+6.  Outlier Detection   — boxplot for all numeric columns
+7.  Scaling             — ColumnTransformer: RobustScaler (outlier cols) + StandardScaler (normal cols)
+8.  Optimal K           — Elbow Method + Silhouette Score (sample_size=10,000, random_state=42)
+9.  KMeans              — K=5, k-means++, n_init=10, max_iter=350, random_state=42
+10. Cluster Analysis    — groupby means, cluster heatmap, boxplots (salary/balance/credit)
+11. Correlation Heatmap — all features correlation matrix
+12. PCA Visualization   — 2D scatter plot with cluster colors
+13. Export              — bank_clustered.csv saved
+14. Train/Test Split    — 80/20, stratify=y, random_state=42
+15. Re-scaling          — CT2 fit_transform(X_train), transform(X_test)
+16. Model Training      — KNN, LR(L1), LR(L2), Decision Tree, Random Forest
+17. Overfit Check       — train vs test accuracy comparison
+18. Feature Importance  — top 10 features from Random Forest
+19. Hyperparameter Tuning — RandomizedSearchCV (60 iter, StratifiedKFold n=5, f1_weighted)
+20. Evaluation          — Accuracy, Precision, Recall, F1, ROC AUC (OVO), Log Loss, Brier Score
+21. Prediction Test     — single customer prediction example
+22. Deployment          — pickle → FastAPI → Docker → Hugging Face Spaces
 ```
 
 ---
