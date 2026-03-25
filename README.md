@@ -14,7 +14,6 @@ Takes a customer's salary, balance, credit score, transaction history and 16 oth
 
 ---
 
-## Pipeline
 
 ```
 1.  Data Loading        — pd.read_csv, shape, dtypes check
